@@ -33,9 +33,11 @@
                 if (image.src.endsWith("free-icon-ceiling-fan-6226565.png")) {
                     image.src =
                         "../static/img/free-icon-ceiling-fan-6226671.png";
+                    fetch("/relay_turn_off");
                 } else {
                     image.src =
                         "../static/img/free-icon-ceiling-fan-6226565.png";
+                    fetch("/relay_turn_on");
                 }
             }
             function toggleImage2() {
@@ -57,12 +59,16 @@
             <div class="row">
                 <section class="col-6 col-md-3 py-3">
                     <div class="card">
-                        <div class="card-body">집온도</div>
+                        <div class="card-body">
+                            집온도 <span class="temperature_data"></span>C
+                        </div>
                     </div>
                 </section>
                 <section class="col-6 col-md-3 py-3">
                     <div class="card">
-                        <div class="card-body">집습도</div>
+                        <div class="card-body">
+                            집습도 <span class="humidity_data"></span>%
+                        </div>
                     </div>
                 </section>
                 <section class="col-6 col-md-3 py-3">
@@ -132,4 +138,5 @@
             <!-- 1칸 끝 -->
         </div>
     </body>
+    <script src="{{ url_for('static', filename='js/getSensorData.js')}}"></script>
 </html>
