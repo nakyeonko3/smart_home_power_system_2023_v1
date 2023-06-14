@@ -19,4 +19,4 @@ def get_BMP180_sensor_data():
 # while True:
 #     time.sleep()
 #     print(get_BMP180_sensor_data())
-get_BMP180_sensor_data()
+# get_BMP180_sensor_data()

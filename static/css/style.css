@@ -1,0 +1,25 @@
+body {
+    background-color: #f5f5f5;
+}
+section {
+    background: #f5f5f5;
+    border: 1px solid red;
+}
+
+header {
+    background: rgb(101, 246, 246);
+}
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.onedayPowerGraph {
+    width: 2814px;
+    height: 465px;
+}
+
+#onedayPowerGraph {
+    width: 2814px;
+    height: 465px;
+}

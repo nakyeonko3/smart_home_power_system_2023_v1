@@ -53,4 +53,4 @@ def mqtt_clinet_start():
     client.loop_forever()
 
 
-mqtt_clinet_start()
+# mqtt_clinet_start()
