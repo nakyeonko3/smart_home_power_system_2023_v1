@@ -28,7 +28,9 @@ def on_message(client, userdata, msg):
     global last_data
     data = int(msg.payload.decode("utf-8"))
     gap = data - last_data
-    if gap >= 1000:
+    if data <= 40:
+        data = 0
+    if gap >= 100:
         data = last_data
     create_csvfile.append_csvfile(data, file_name="power_sensor.csv")
     # print(f"power_value:{data}")

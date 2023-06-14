@@ -20,10 +20,13 @@ def set_relay_gpio_cleanup():
     GPIO.cleanup()
 
 
-# GPIO.cleanup()
-if __name__ == "__main__":
-    set_relay_off()
-    time.sleep(3)
-    set_relay_on()
-    time.sleep(3)
-    set_relay_gpio_cleanup()
+# set_relay_gpio_cleanup()
+
+
+# # GPIO.cleanup()
+# if __name__ == "__main__":
+#     set_relay_off()
+#     time.sleep(3)
+#     set_relay_on()
+#     time.sleep(3)
+#     set_relay_gpio_cleanup()

@@ -1,3 +1,9 @@
+const getPowerOneSecond = () => {
+    return fetch("/get_power_onesecond")
+        .then((response) => response.json())
+        .then((jsondata) => jsondata.power_onesecond);
+};
+
 (async () => {
     const data = {
         labels: [],
@@ -27,7 +33,7 @@
                             chart.data.datasets.forEach(async (dataset) => {
                                 dataset.data.push({
                                     x: Date.now(),
-                                    y: 34,
+                                    y: await getPowerOneSecond(),
                                 });
                             });
                         },

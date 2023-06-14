@@ -6,6 +6,8 @@ error_data = {
     "csv/bmp180sensor.csv": 0,
 }
 
+print(error_data["csv/power_sensor.csv"])
+
 
 def get_senor_value(file_name):
     try:

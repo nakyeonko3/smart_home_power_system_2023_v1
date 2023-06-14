@@ -67,4 +67,10 @@ def get_calc_power_onehour():
     return jsonify(data)
 
 
-app.run(host="0.0.0.0", port=18082, debug=True)
+@app.route("/get_power_onesecond")
+def get_power_onesecond():
+    data = read_csvfile.get_senor_value(file_name="csv/power_sensor.csv")
+    return jsonify({"power_onesecond": data})
+
+
+app.run(host="0.0.0.0", port=18082)

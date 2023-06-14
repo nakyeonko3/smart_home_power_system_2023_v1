@@ -10,15 +10,14 @@
 //     return test1Array;
 // };
 
-// const getForecastData = async () => {
-//     const response = await fetch("/test");
-//     const jsonData = await response.json();
-//     const { test2 } = jsonData;
-//     const tmp = [NaN, NaN, NaN, NaN, NaN];
-//     const test2Array = tmp.concat(test2);
-//     console.log(test2Array);
-//     return test2Array;
-// };
+const getForecastData = async () => {
+    const response = await fetch("/calc_power_oneday");
+    const jsonData = await response.json();
+    // const tmp = [NaN, NaN, NaN, NaN, NaN];
+    // const test2Array = tmp.concat(test2);
+    console.log(jsonData);
+    return jsonData;
+};
 
 (async () => {
     const labels = [
