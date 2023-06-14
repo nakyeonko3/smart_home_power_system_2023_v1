@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            rel="stylesheet"
+            href=" https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        />
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <style>
+            body {
+                background-color: #f5f5f5;
+            }
+            section {
+                background: #f5f5f5;
+                border: 1px solid red;
+            }
+            header {
+                background: rgb(101, 246, 246);
+            }
+            .container-fluid {
+                padding-right: 0;
+                padding-left: 0;
+            }
+        </style>
+        <script>
+            function toggleImage() {
+                var image = document.getElementById("ceilingFan");
+                if (image.src.endsWith("free-icon-ceiling-fan-6226565.png")) {
+                    image.src =
+                        "../static/img/free-icon-ceiling-fan-6226671.png";
+                } else {
+                    image.src =
+                        "../static/img/free-icon-ceiling-fan-6226565.png";
+                }
+            }
+            function toggleImage2() {
+                var image = document.getElementById("refrigerator");
+                if (image.src.endsWith("free-icon-exhaust-fan-5993816.png")) {
+                    image.src =
+                        "../static/img/free-icon-exhaust-fan-5993819.png";
+                } else {
+                    image.src =
+                        "../static/img/free-icon-exhaust-fan-5993816.png";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <header class="text-white py-3">header</header>
+
+        <div class="container-fluid">
+            <div class="row">
+                <section class="col-6 col-md-3 py-3">
+                    <div class="card">
+                        <div class="card-body">집온도</div>
+                    </div>
+                </section>
+                <section class="col-6 col-md-3 py-3">
+                    <div class="card">
+                        <div class="card-body">집습도</div>
+                    </div>
+                </section>
+                <section class="col-6 col-md-3 py-3">
+                    <div class="card">
+                        <div class="card-body">오늘 하루 total 전력량</div>
+                    </div>
+                </section>
+                <section class="col-6 col-md-3 py-3">
+                    <div class="card">
+                        <div class="card-body">다음달 전깃세</div>
+                    </div>
+                </section>
+            </div>
+            <!-- 4칸 끝 -->
+            <div class="row">
+                <section class="col-3 py-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">리모콘 섹션</h5>
+                            <button
+                                type="button"
+                                class="btn btn-light"
+                                onclick="toggleImage()"
+                            >
+                                <img
+                                    id="ceilingFan"
+                                    src="{{ url_for( 'static', filename='img/free-icon-ceiling-fan-6226565.png') }}"
+                                    height="50"
+                                    width="50"
+                                />
+                            </button>
+                            <button
+                                type="button"
+                                class="btn btn-light"
+                                onclick="toggleImage2()"
+                            >
+                                <img
+                                    id="refrigerator"
+                                    src="../static/img/free-icon-exhaust-fan-5993816.png"
+                                    height="50"
+                                    width="50"
+                                />
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                <section class="col-9 py-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">전력 소비 그래프</h5>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- 2칸 끝 -->
+            <div class="row">
+                <section class="col-12 py-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                전력 데이터 (오늘 하루 기준)
+                            </h5>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- 1칸 끝 -->
+        </div>
+    </body>
+</html>
