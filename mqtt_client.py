@@ -41,6 +41,8 @@ def on_message(client, userdata, msg):
 
 # 콜백 함수 설정 on_connect(브로커에 접속), on_disconnect(브로커에 접속중료), on_subscribe(topic 구독)
 
+# 저장
+
 
 def mqtt_clinet_start():
     client = mqtt.Client()
