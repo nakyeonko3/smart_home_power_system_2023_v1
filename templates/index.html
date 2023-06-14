@@ -1,136 +1,211 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link
             rel="stylesheet"
-            href=" https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+            integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+            crossorigin="anonymous"
         />
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <link
             rel="stylesheet"
-            href="{{ url_for('static', filename='css/style.css')}}"
+            type="text/css"
+            href="{{ url_for('static', filename='css/style.css') }}"
         />
-        <script>
-            function toggleImage() {
-                var image = document.getElementById("ceilingFan");
-                if (image.src.endsWith("free-icon-ceiling-fan-6226565.png")) {
-                    image.src =
-                        "../static/img/free-icon-ceiling-fan-6226671.png";
-                    fetch("/relay_turn_off");
-                } else {
-                    image.src =
-                        "../static/img/free-icon-ceiling-fan-6226565.png";
-                    fetch("/relay_turn_on");
-                }
-            }
-            function toggleImage2() {
-                var image = document.getElementById("refrigerator");
-                if (image.src.endsWith("free-icon-exhaust-fan-5993816.png")) {
-                    image.src =
-                        "../static/img/free-icon-exhaust-fan-5993819.png";
-                } else {
-                    image.src =
-                        "../static/img/free-icon-exhaust-fan-5993816.png";
-                }
-            }
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/luxon@1.27.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.0.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0"></script>
+        <title>플러그 전력 서비스</title>
     </head>
-    <body>
-        <header class="text-white py-3">header</header>
 
-        <div class="container-fluid">
-            <div class="row">
-                <section class="col-6 col-md-3 py-3">
-                    <div class="card">
-                        <div class="card-body">
-                            집온도 <span class="temperature_data"></span>C
-                        </div>
-                    </div>
-                </section>
-                <section class="col-6 col-md-3 py-3">
-                    <div class="card">
-                        <div class="card-body">
-                            집습도 <span class="humidity_data"></span>%
-                        </div>
-                    </div>
-                </section>
-                <section class="col-6 col-md-3 py-3">
-                    <div class="card">
-                        <div class="card-body">오늘 하루 total 전력량</div>
-                    </div>
-                </section>
-                <section class="col-6 col-md-3 py-3">
-                    <div class="card">
-                        <div class="card-body">다음달 전깃세</div>
-                    </div>
-                </section>
+    <body>
+        <div class="container">
+            <div class="topbar">
+                <div class="logo">
+                    <h2>플러그 전력 서비스</h2>
+                </div>
+                <div class="search">
+                    <input
+                        type="text"
+                        name="search"
+                        placeholder="search here"
+                    />
+                    <label for="search"><i class="fas fa-search"></i></label>
+                </div>
+                <i class="fas fa-bell"></i>
+                <div class="user">
+                    <img src="img/user.png" alt="" />
+                    <img
+                        src="{{ url_for('static', filename='img/user.png') }}"
+                        alt=""
+                    />
+                </div>
             </div>
-            <!-- 4칸 끝 -->
-            <div class="row">
-                <section class="col-3 py-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">리모콘 섹션</h5>
-                            <button
-                                type="button"
-                                class="btn btn-light"
-                                onclick="toggleImage()"
-                            >
-                                <img
-                                    id="ceilingFan"
-                                    src="{{ url_for( 'static', filename='img/free-icon-ceiling-fan-6226565.png') }}"
-                                    height="50"
-                                    width="50"
-                                />
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-light"
-                                onclick="toggleImage2()"
-                            >
-                                <img
-                                    id="refrigerator"
-                                    src="../static/img/free-icon-exhaust-fan-5993816.png"
-                                    height="50"
-                                    width="50"
-                                />
-                            </button>
-                        </div>
-                    </div>
-                </section>
-                <section class="col-9 py-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">전력 소비 그래프</h5>
-                            <canvas id="onedayDonutGraph" width="2814"></canvas>
-                        </div>
-                    </div>
-                </section>
+            <div class="sidebar">
+                <ul>
+                    <li>
+                        <a id="dashboard" href="/">
+                            <i class="fas fa-th-large"></i>
+                            <div>Dashboard</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="mypage" href="/mypage">
+                            <i class="fas fa-user"></i>
+                            <div>My Page</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="help" href="#">
+                            <i class="fas fa-question"></i>
+                            <div>Help</div>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <!-- 2칸 끝 -->
-            <div class="row">
-                <section class="col-12 py-3">
+            <div class="main">
+                <div class="cards">
                     <div class="card">
-                        <div class="card-body onedayPowerGraph">
-                            <h5 class="card-title">
-                                전력 데이터 (오늘 하루 기준)
-                            </h5>
-                            <canvas id="onedayPowerGraph" width="2814"></canvas>
+                        <div class="card-content">
+                            <div class="number">
+                                <span class="temperature_data"></span>C
+                            </div>
+                            <div class="card-name">온도</div>
+                        </div>
+                        <div class="icon-box">
+                            <i class="fas fa-thermometer-half"></i>
                         </div>
                     </div>
-                </section>
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="number">
+                                <span class="humidity_data"></span>%
+                            </div>
+                            <div class="card-name">현재 습도</div>
+                        </div>
+                        <div class="icon-box">
+                            <span class="fas fa-tint"></span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="number">2345kwh</div>
+                            <div class="card-name">오늘 Total 전력량</div>
+                        </div>
+                        <div class="icon-box">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="number">5630원</div>
+                            <div class="card-name">다음달 전깃세 예상</div>
+                        </div>
+                        <div class="icon-box">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="cards cards-plug">
+                    <div class="card PlugButton1-background">
+                        <div class="card-content PlugButton1-background">
+                            <div class="number PlugButton1">ON</div>
+                            <div class="card-name">플러그1 전원</div>
+                        </div>
+                        <div class="icon-box">
+                            <span class="fas fa-plug"></span>
+                        </div>
+                    </div>
+                    <div class="card PlugButton2-background">
+                        <div class="card-content PlugButton2-background">
+                            <div class="number PlugButton2">ON</div>
+                            <div class="card-name">플러그2 전원</div>
+                        </div>
+                        <div class="icon-box">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                    </div>
+                    <div class="card PlugButton3-background">
+                        <div class="card-content PlugButton3-background">
+                            <div class="number PlugButton3">ON</div>
+                            <div class="card-name">플러그3 전원</div>
+                        </div>
+                        <div class="icon-box">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                    </div>
+                    <div class="card PlugButton4-background">
+                        <div class="card-content PlugButton4-background">
+                            <div class="number PlugButton4">ON</div>
+                            <div class="card-name">플러그4 전원</div>
+                        </div>
+                        <div class="icon-box">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="charts">
+                    <div class="chart lineChart">
+                        <h2>오늘 하루 24시간 전력 사용 그래프(시간)</h2>
+                        <div>
+                            <canvas id="lineChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart doughnut-chart">
+                        <h2>전력 소비 비중 그래프</h2>
+                        <div>
+                            <canvas id="doughnut"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart doughnut-chart">
+                        <h2>다음날 예상 전력 데이터</h2>
+                        <div>
+                            <canvas id="lineChart2"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart doughnut-chart">
+                        <h2>실시간 전력 데이터(초당)</h2>
+                        <div>
+                            <canvas id="realTimeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- 1칸 끝 -->
         </div>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script> -->
+        <script
+            type="module"
+            src="{{ url_for('static', filename='js/chart1.js') }}"
+        ></script>
+        <script
+            type="module"
+            src="{{ url_for('static', filename='js/chart2.js') }}"
+        ></script>
+        <script
+            type="module"
+            src="{{ url_for('static', filename='js/chart3.js') }}"
+        ></script>
+
+        <script
+            type="module"
+            src="{{ url_for('static', filename='js/realTimeChart.js') }}"
+        ></script>
+        <script
+            type="module"
+            src="{{ url_for('static', filename='js/size.js') }}"
+        ></script>
+
+        <script
+            type="module"
+            src="{{ url_for('static', filename='js/togglebButton.js') }}"
+        ></script>
+        <script
+            type="module"
+            src="{{ url_for('static', filename='js/getSensorData.js') }}"
+        ></script>
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-    <script src="{{ url_for('static', filename='js/getSensorData.js')}}"></script>
-    <script src="{{ url_for('static', filename='js/drawgraph.js')}}"></script>
-    <script src="{{ url_for('static', filename='js/drawDonutgraph.js')}}"></script>
-</html>
 </html>
