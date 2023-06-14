@@ -8,20 +8,20 @@ const getTemperSensorValue = () => {
 };
 
 const renderTemperValue = async () => {
-    sensorData = await getTemperSensorValue();
-    temperature = sensorData.temperature;
-    humidity = sensorData.humidity;
+    const sensorData = await getTemperSensorValue();
+    const temperature = sensorData.temperature;
+    const humidity = sensorData.humidity;
     temperature_span.innerText = temperature;
     humidity_span.innerText = humidity;
 };
 
-const getPowerValue = () => {
-    return fetch("/calc_power_oneday").then((response) => response.json());
-};
+// const getPowerValue = () => {
+//     return fetch("/calc_power_oneday").then((response) => response.json());
+// };
 
-const renderPowerValue = async () => {
-    const sensorData = await getPowerValue();
-};
+// const renderPowerValue = async () => {
+//     const sensorData = await getPowerValue();
+// };
 
-renderPowerValue();
+// renderPowerValue();
 setInterval(renderTemperValue, 1000);
