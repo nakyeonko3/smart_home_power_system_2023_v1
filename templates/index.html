@@ -8,13 +8,8 @@
             rel="stylesheet"
             href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
             integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-            crossorigin="anonymous"
-        />
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="{{ url_for('static', filename='css/style.css') }}"
-        />
+            crossorigin="anonymous" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2"></script>
         <script src="https://cdn.jsdelivr.net/npm/luxon@1.27.0"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.0.0"></script>
@@ -29,20 +24,13 @@
                     <h2>플러그 전력 서비스</h2>
                 </div>
                 <div class="search">
-                    <input
-                        type="text"
-                        name="search"
-                        placeholder="search here"
-                    />
+                    <input type="text" name="search" placeholder="search here" />
                     <label for="search"><i class="fas fa-search"></i></label>
                 </div>
                 <i class="fas fa-bell"></i>
                 <div class="user">
                     <img src="img/user.png" alt="" />
-                    <img
-                        src="{{ url_for('static', filename='img/user.png') }}"
-                        alt=""
-                    />
+                    <img src="{{ url_for('static', filename='img/user.png') }}" alt="" />
                 </div>
             </div>
             <div class="sidebar">
@@ -71,9 +59,7 @@
                 <div class="cards">
                     <div class="card">
                         <div class="card-content">
-                            <div class="number">
-                                <span class="temperature_data"></span>C
-                            </div>
+                            <div class="number"><span class="temperature_data"></span>C</div>
                             <div class="card-name">온도</div>
                         </div>
                         <div class="icon-box">
@@ -82,9 +68,7 @@
                     </div>
                     <div class="card">
                         <div class="card-content">
-                            <div class="number">
-                                <span class="humidity_data"></span>%
-                            </div>
+                            <div class="number"><span class="humidity_data"></span>%</div>
                             <div class="card-name">현재 습도</div>
                         </div>
                         <div class="icon-box">
@@ -156,7 +140,7 @@
                         </div>
                     </div>
                     <div class="chart doughnut-chart">
-                        <h2>전력 소비 비중 그래프</h2>
+                        <h2>시간별 전력 비중 그래프</h2>
                         <div>
                             <canvas id="doughnut"></canvas>
                         </div>
@@ -177,35 +161,14 @@
             </div>
         </div>
         <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script> -->
-        <script
-            type="module"
-            src="{{ url_for('static', filename='js/chart1.js') }}"
-        ></script>
-        <script
-            type="module"
-            src="{{ url_for('static', filename='js/chart2.js') }}"
-        ></script>
-        <script
-            type="module"
-            src="{{ url_for('static', filename='js/chart3.js') }}"
-        ></script>
+        <script type="module" src="{{ url_for('static', filename='js/chart1.js') }}"></script>
+        <script type="module" src="{{ url_for('static', filename='js/chart2.js') }}"></script>
+        <script type="module" src="{{ url_for('static', filename='js/chart3.js') }}"></script>
 
-        <script
-            type="module"
-            src="{{ url_for('static', filename='js/realTimeChart.js') }}"
-        ></script>
-        <script
-            type="module"
-            src="{{ url_for('static', filename='js/size.js') }}"
-        ></script>
+        <script type="module" src="{{ url_for('static', filename='js/realTimeChart.js') }}"></script>
+        <script type="module" src="{{ url_for('static', filename='js/size.js') }}"></script>
 
-        <script
-            type="module"
-            src="{{ url_for('static', filename='js/togglebButton.js') }}"
-        ></script>
-        <script
-            type="module"
-            src="{{ url_for('static', filename='js/getSensorData.js') }}"
-        ></script>
+        <script type="module" src="{{ url_for('static', filename='js/togglebButton.js') }}"></script>
+        <script type="module" src="{{ url_for('static', filename='js/getSensorData.js') }}"></script>
     </body>
 </html>

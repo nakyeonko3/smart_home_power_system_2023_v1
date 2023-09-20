@@ -30,3 +30,8 @@ def set_relay_gpio_cleanup():
 #     set_relay_on()
 #     time.sleep(3)
 #     set_relay_gpio_cleanup()
+# set_relay_off()
+# time.sleep(4)
+# set_relay_on()
+# time.sleep(4)
+# GPIO.cleanup()

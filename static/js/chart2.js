@@ -1,5 +1,5 @@
 (async () => {
-    const labels = ["플러그1", "플러그2", "플러그3", "플러그4"];
+    const labels = ["아침 12시", "낮 12시 ~ 18시", "밤 18시"];
     const data = {
         labels: labels,
         datasets: [
@@ -28,5 +28,6 @@
     // </block:config>
 
     const ctx = document.getElementById("doughnut").getContext("2d");
+    console.log("hello, world");
     const myChart = new Chart(ctx, config);
 })();
